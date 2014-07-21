@@ -1,5 +1,13 @@
 <resources>
 
     <string name="app_name">BoyAssitant</string>
-
+	<string name="Notes">Notes:</string>
+	<!-- &#038; means & -->
+	<string name="DateTime">Date&#038;Time:</string>
+	<string name="SendMessage">SendMessage</string>
+	<string name="MakeCall">MakeCall</string>
+	<string name="InputNumber">Input Number:</string>
+	<string name="cancel">Cancel</string>
+	<string name="ok">Ok</string>
+	<string name="Comfirme">Comfirme</string>
 </resources>

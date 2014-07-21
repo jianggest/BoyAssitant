@@ -8,15 +8,17 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notes：" />
+        android:text="@string/Notes" />
 
     <EditText
         android:id="@+id/edtMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.75"
-        android:ems="10" >
-
+        android:ems="10" 
+        android:inputType="textMultiLine"
+		android:gravity="left|top"
+		android:minLines="6" >
         <requestFocus />
     </EditText>
 
@@ -24,7 +26,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date&amp;Time:" />
+        android:text="@string/DateTime" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,14 +37,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
-            android:text="Date" />
+             />
 
         <Button
             android:id="@+id/btnTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.24"
-            android:text="Time" />
+             />
 
     </LinearLayout>
 	<LinearLayout
@@ -52,7 +54,7 @@
         android:id="@+id/ckSendMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SendMessage" />
+        android:text="@string/SendMessage" />
     <TextView
         android:id="@+id/txtMessagenumber"
         android:layout_width="wrap_content"
@@ -66,7 +68,7 @@
         android:id="@+id/ckCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MakeCall" />
+        android:text="@string/MakeCall" />
     <TextView
         android:id="@+id/txtPhonenumber"
         android:layout_width="wrap_content"
@@ -77,6 +79,6 @@
         android:id="@+id/btnComfirme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirme" />
+        android:text="@string/Comfirme" />
 
 </LinearLayout>

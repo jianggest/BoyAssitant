@@ -1,3 +1,9 @@
+//
+// This is a activity to set the an alarm to send a message or make call
+//
+// Author: Jianggest@gmail.com
+// Time : 2014Äê7ÔÂ21ÈÕ20:59:31
+//
 package com.jianggest.boyassitant;
 
 import java.nio.channels.SelectableChannel;
@@ -14,6 +20,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,7 +58,7 @@ public class Tips extends Activity {
 
 		txtMessageNumber = (TextView)findViewById(R.id.txtMessagenumber);
 		txtCallNumber = (TextView)findViewById(R.id.txtPhonenumber);
-		
+		initDateTime();
 		setDate();
 		setTime();
 		getMessage();
@@ -59,16 +66,9 @@ public class Tips extends Activity {
 		setCheckBox();
 	}
 
+	//set the sendMessage or makeCall check box .
 	private void setCheckBox() {
 		sendMessageCheckBox = (CheckBox) findViewById(R.id.ckSendMessage);
-		sendMessageCheckBox.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
-			}
-		});
 		sendMessageCheckBox
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -82,14 +82,6 @@ public class Tips extends Activity {
 				});
 
 		makecallCheckBox = (CheckBox) findViewById(R.id.ckCall);
-		makecallCheckBox.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
-			}
-		});
 		makecallCheckBox
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -102,7 +94,8 @@ public class Tips extends Activity {
 					}
 				});
 	}
-
+	
+	//show a pop up dialog to input the phone number.
 	private void getPhoneNumber(final int fromFlag, boolean isSet) {
 		final EditText inputServer = new EditText(this);
 		if (fromFlag == 1) {
@@ -119,10 +112,13 @@ public class Tips extends Activity {
 		
 		if (isSet) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle("Input Number")
+			String inpuString = getResources().getString(R.string.InputNumber);
+			String okString = getResources().getString(R.string.ok);
+			String calcelString = getResources().getString(R.string.cancel);
+			builder.setTitle(inpuString)
 					.setIcon(android.R.drawable.ic_dialog_info)
-					.setView(inputServer).setNegativeButton("Cancel", null);
-			builder.setPositiveButton("Ok",
+					.setView(inputServer).setNegativeButton(calcelString, null);
+			builder.setPositiveButton(okString,
 					new DialogInterface.OnClickListener() {
 
 						public void onClick(DialogInterface dialog, int which) {
@@ -156,8 +152,23 @@ public class Tips extends Activity {
 		mMessageString = edtMessage.getText().toString();
 	}
 
-	private void setDate() {
+	//init the date and time for the select the date and time button.
+	private void initDateTime(){
+		c = Calendar.getInstance();
+		int hour = c.get(Calendar.HOUR_OF_DAY);
+		int minute = c.get(Calendar.MINUTE);
+		int month = c.get(Calendar.MONTH);
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		int year = c.get(Calendar.YEAR);
+		String dateString = year + "." + month + "." + day;
+		String time = hour + ":" + minute;
 		btnDateButton = (Button) findViewById(R.id.btnDate);
+		btnDateButton.setText(dateString);
+		btnTimeButton = (Button) findViewById(R.id.btnTime);
+		btnTimeButton.setText(time);
+	}
+	private void setDate() {
+		
 		btnDateButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -169,7 +180,7 @@ public class Tips extends Activity {
 	}
 
 	private void setTime() {
-		btnTimeButton = (Button) findViewById(R.id.btnTime);
+		
 		btnTimeButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -180,6 +191,7 @@ public class Tips extends Activity {
 		});
 	}
 
+	//show a pop up dialog to get the time 
 	private void pickTime() {
 		c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -199,6 +211,7 @@ public class Tips extends Activity {
 		}, hour, minute, true).show();
 	}
 
+	//show a pop up dialog to get the date
 	private void pickDate() {
 		c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -231,6 +244,7 @@ public class Tips extends Activity {
 		});
 	}
 
+	//the core code to set a alarm 
 	protected void setAlarm() {
 		getMessage();
 		c = Calendar.getInstance();
