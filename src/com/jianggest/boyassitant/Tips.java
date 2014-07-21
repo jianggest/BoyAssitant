@@ -155,13 +155,13 @@ public class Tips extends Activity {
 	//init the date and time for the select the date and time button.
 	private void initDateTime(){
 		c = Calendar.getInstance();
-		int hour = c.get(Calendar.HOUR_OF_DAY);
-		int minute = c.get(Calendar.MINUTE);
-		int month = c.get(Calendar.MONTH);
-		int day = c.get(Calendar.DAY_OF_MONTH);
-		int year = c.get(Calendar.YEAR);
-		String dateString = year + "." + month + "." + day;
-		String time = hour + ":" + minute;
+		mHour = c.get(Calendar.HOUR_OF_DAY);
+		mMintes = c.get(Calendar.MINUTE);
+		mMonth = c.get(Calendar.MONTH);
+		mDay = c.get(Calendar.DAY_OF_MONTH);
+		mYear = c.get(Calendar.YEAR);
+		String dateString = mYear + "." + (mMonth+1) + "." + mDay;
+		String time = mHour + ":" + mMintes;
 		btnDateButton = (Button) findViewById(R.id.btnDate);
 		btnDateButton.setText(dateString);
 		btnTimeButton = (Button) findViewById(R.id.btnTime);
@@ -223,7 +223,8 @@ public class Tips extends Activity {
 			public void onDateSet(DatePicker arg0, int year, int monthOfYear,
 					int dayOfMonth) {
 				// TODO Auto-generated method stub
-				String dateString = year + "." + monthOfYear + "." + dayOfMonth;
+				
+				String dateString = year + "." + (monthOfYear+1)+ "." + dayOfMonth;
 				mYear = year;
 				mMonth = monthOfYear;
 				mDay = dayOfMonth;
@@ -263,8 +264,8 @@ public class Tips extends Activity {
 		PendingIntent pi = PendingIntent.getBroadcast(Tips.this, 0, intent, 0);
 		AlarmManager am = (AlarmManager) getSystemService(Activity.ALARM_SERVICE);
 		am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);// 设置闹钟
-		am.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),
-				(10 * 1000), pi);// 重复设置
+//		am.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),
+//				(100 * 1000), pi);// 重复设置
 
 		Toast.makeText(Tips.this, "设置的闹钟时间为" + mHour + ":" + mMintes,
 				Toast.LENGTH_LONG).show();
